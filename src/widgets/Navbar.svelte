@@ -4,7 +4,9 @@
 
     <ul class="flex space-x-5">
       {#each links as link }
-        <li class="hover:font-medium cursor-pointer">{link.title}</li>
+        <li class={`hover:text-blue-600 font-medium cursor-pointer ${$page.route.id === link.href ? 'text-blue-600' : ''}`}>
+          <a href={link.href}>{link.title}</a>
+        </li>
       {/each}
     </ul>
   </div>
@@ -44,22 +46,28 @@
 
 <script lang='ts'>
   import {AdjustmentsHorizontal, ArrowRightOnRectangle, Wallet} from 'svelte-heros-v2'
+  import {page} from '$app/stores'
 
   export let baseLayoutClass: string = '';
   let showProfileDropdown = false;
+  console.log({page: $page})
 
   const links = [
     {
-      title: 'Dashboard'
+      title: 'Dashboard',
+      href: '/'
     },
     {
-      title: 'Wallets'
+      title: 'Wallets',
+      href: '/wallets'
     },
     {
-      title: 'Records'
+      title: 'Records',
+      href: '/records'
     },
     {
-      title: 'Statistics'
+      title: 'Statistics',
+      href: '/statistics'
     }
   ]
 
