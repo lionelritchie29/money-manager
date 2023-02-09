@@ -4,8 +4,8 @@
 </script>
 
 <section>
-  <h1 class="text-2xl font-bold">Wallets</h1>
-  <ul class="grid grid-cols-4 gap-4 mt-2">
+  <h1 class="text-2xl font-bold mb-2">Wallets</h1>
+  <ul class="grid grid-cols-4 gap-4">
     {#each wallets as wallet}
       <li>
         <div class="rounded-lg bg-white h-24 shadow-sm">
@@ -16,8 +16,8 @@
   </ul>
 
   <div class="mt-8"></div>
-  <h1 class="text-2xl font-bold">Overview</h1>
-  <ul class="grid grid-cols-3 gap-4 mt-2">
+  <h1 class="text-2xl font-bold mb-2">Overview</h1>
+  <ul class="grid grid-cols-3 gap-4">
     {#each dummies as item}
       <li>
         <div class="rounded-lg bg-white h-64 shadow-sm">
