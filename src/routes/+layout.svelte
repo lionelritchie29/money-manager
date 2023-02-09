@@ -8,7 +8,9 @@
 <div class="root">
   <Navbar {baseLayoutClass}/>  
 
-  <section class={`${baseLayoutClass} pt-4`}>
-    <slot></slot>
+  <section class={`bg-gray-100 min-h-screen`}>
+    <div class={`${baseLayoutClass} pt-4`}>
+      <slot></slot>
+    </div>
   </section>
 </div>

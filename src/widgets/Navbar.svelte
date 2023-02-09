@@ -1,6 +1,6 @@
 <nav class={`${baseLayoutClass} py-4 flex justify-between items-center`}>
   <div class="flex">
-    <div class="font-semibold mr-8">Money Manager</div>
+    <div class="font-semibold mr-8 flex"> <Wallet class="mr-2" /> Money Manager</div>
 
     <ul class="flex space-x-5">
       {#each links as link }
@@ -43,7 +43,7 @@
 <div class="border-b border-gray-300"></div>
 
 <script lang='ts'>
-  import {AdjustmentsHorizontal, ArrowRightOnRectangle} from 'svelte-heros-v2'
+  import {AdjustmentsHorizontal, ArrowRightOnRectangle, Wallet} from 'svelte-heros-v2'
 
   export let baseLayoutClass: string = '';
   let showProfileDropdown = false;
