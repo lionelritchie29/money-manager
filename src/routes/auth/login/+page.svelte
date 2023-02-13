@@ -1,4 +1,5 @@
 <script lang='ts'>
+	import { goto } from '$app/navigation';
 	import { signInWithPopup, type UserCredential } from 'firebase/auth';
 	import { Wallet } from 'svelte-heros-v2';
   import {googleProvider, auth} from '../../../firebase'
@@ -26,9 +27,19 @@
       displayName: result.user.displayName,
       email: result.user.email,
       phoneNumber: result.user.phoneNumber,
-      photoUrl: result.user.photoURL
+      photoUrl: result.user.photoURL,
+      uid: result.user.uid
     }
-    console.log({user});
+
+    const response = await fetch('/auth/login', {method: 'POST', body: JSON.stringify(user)});
+    const {success}: {success: boolean} = await response.json();
+
+    if (!success) {
+      console.log('An error occured');
+      return;
+    } 
+
+    goto('/', {replaceState: true})
   }
 </script>
 

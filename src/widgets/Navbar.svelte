@@ -50,7 +50,6 @@
 
   export let baseLayoutClass: string = '';
   let showProfileDropdown = false;
-  console.log({page: $page})
 
   const links = [
     {
@@ -83,7 +82,6 @@
   ]
 
   const toggleProfileDropdown = () => {
-    console.log('run')
     showProfileDropdown = !showProfileDropdown
   }
 </script>
