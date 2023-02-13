@@ -1,6 +1,6 @@
 <script>
-  import '../styles/app.css'
-	import Navbar from '../widgets/Navbar.svelte';
+  import '../../styles/app.css'
+	import Navbar from '../../widgets/Navbar.svelte';
 
   const baseLayoutClass = 'max-w-7xl mx-auto px-8'
 </script>
