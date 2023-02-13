@@ -31,7 +31,7 @@
         <ul class="absolute min-w-[12rem] shadow top-12 left-0 bg-white rounded border">
           {#each userLinks as link}
             <li>
-              <button class="p-4 hover:bg-gray-100 w-full flex items-center">
+              <button on:click={link.action} class="p-4 hover:bg-gray-100 w-full flex items-center">
                 <svelte:component class="mr-3" this={link.icon} />
                 {link.title}</button>
             </li>
@@ -47,6 +47,7 @@
 <script lang='ts'>
   import {AdjustmentsHorizontal, ArrowRightOnRectangle, Wallet} from 'svelte-heros-v2'
   import {page} from '$app/stores'
+	import { goto } from '$app/navigation';
 
   export let baseLayoutClass: string = '';
   let showProfileDropdown = false;
@@ -70,16 +71,30 @@
     }
   ]
 
+  const signOut = async () => {
+    const response = await fetch('/logout', {method: 'POST'});
+    const {success}: {success: boolean} = await response.json();
+
+    if (!success) {
+      console.error('Logout failed');
+      return;
+    }
+
+    goto('/login');
+  }
+
   const userLinks = [
     {
       title: 'Settings',
-      icon: AdjustmentsHorizontal
+      icon: AdjustmentsHorizontal,
+      action: () => {console.log('settings')}
     },
     {
       title: 'Log out',
-      icon: ArrowRightOnRectangle
+      icon: ArrowRightOnRectangle,
+      action: signOut
     }
-  ]
+  ] 
 
   const toggleProfileDropdown = () => {
     showProfileDropdown = !showProfileDropdown
