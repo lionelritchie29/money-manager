@@ -2,7 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { signInWithPopup, type UserCredential } from 'firebase/auth';
 	import { Wallet } from 'svelte-heros-v2';
-  import {googleProvider, auth} from '../../../firebase'
+  import {googleProvider, auth} from '$lib/firebase'
 	import type { User } from '../../../types/User';
 
   let normalGoogleSignInBtnImg = '/images/btn_google_signin_light_normal_web.png'
