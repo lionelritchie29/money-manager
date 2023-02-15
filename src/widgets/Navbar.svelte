@@ -21,7 +21,7 @@
       <div class="w-10 h-10 rounded-full border bg-gray-300"></div>
       <div class="ml-2">
         <span class="block font-semibold flex items-center">
-          <span>Lionel Ritchie</span>
+          <span>{$currentUser.displayName}</span>
           <span class="block -mt-1 ml-1">&#8964;</span>
         </span>
         <span class="text-xs block text-gray-400">Member</span>
@@ -48,6 +48,7 @@
   import {AdjustmentsHorizontal, ArrowRightOnRectangle, Wallet} from 'svelte-heros-v2'
   import {page} from '$app/stores'
 	import { goto } from '$app/navigation';
+  import {currentUser} from "$lib/auth"
 
   export let baseLayoutClass: string = '';
   let showProfileDropdown = false;

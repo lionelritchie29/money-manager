@@ -1,7 +1,12 @@
-<script>
-  import '../../styles/app.css'
+<script lang='ts'>
+  import '../../styles/app.css';
 	import Navbar from '../../widgets/Navbar.svelte';
-
+  import type { LayoutData } from './$types';
+  import { currentUser } from '$lib/auth';
+  
+  export let data: LayoutData;
+  currentUser.set(data.user);
+  
   const baseLayoutClass = 'max-w-7xl mx-auto px-8'
 </script>
 
