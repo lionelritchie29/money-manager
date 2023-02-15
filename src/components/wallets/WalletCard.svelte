@@ -11,11 +11,14 @@
       <div class="p-2 rounded-lg" style:background={wallet.color}>
         <WalletIcon class="w-6 h-6 text-gray-100" />
       </div>
-      <div class="ml-9 text-gray-500 font-medium">{wallet.type}</div>
+      <div class="ml-4 text-gray-500 font-semibold">{wallet.name}</div>
     </div>
 
-    <div class="font-semibold">
-      {format(wallet.currency, wallet.initialBalance)}
+    <div class="flex">
+      <div class="mr-4">{wallet.type}</div>
+      <span class="font-semibold">
+        {format(wallet.currency, wallet.initialBalance)}
+      </span>
     </div>
   </div>
 </div>

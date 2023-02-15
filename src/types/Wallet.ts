@@ -1,9 +1,9 @@
 export interface Wallet {
 	userId: string;
-	currency: 'IDR';
+	currency: string;
 	color: string;
 	excludeFromStatistic: boolean;
 	name: string;
 	initialBalance: number;
-	type: 'Cash';
+	type: string;
 }

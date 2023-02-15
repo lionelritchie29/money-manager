@@ -1,8 +1,11 @@
 <script lang='ts'>
+  import CreateWalletModal from '../../../components/wallets/CreateWalletModal.svelte';
   import WalletCard from '../../../components/wallets/WalletCard.svelte';
 	import SideLayout from '../../../widgets/SideLayout.svelte';
-import type { PageData } from './$types';
+  import type { PageData } from './$types';
+  
   export let data: PageData;
+  let showCreateModal = false;
 
   const wallets = data.wallets;
 </script>
@@ -11,7 +14,7 @@ import type { PageData } from './$types';
   <span slot="title">Wallets</span>
 
   <div slot="side-content">
-    <button class="btn-success">+ Add Wallet</button>
+    <button class="btn-success" on:click={() => showCreateModal = true}>+ Add Wallet</button>
   </div>
 
   <ul slot="main-content" class="grid grid-cols-1 gap-4">
@@ -22,3 +25,5 @@ import type { PageData } from './$types';
     {/each}
   </ul>
 </SideLayout>
+
+{#if showCreateModal} <CreateWalletModal on:close="{() => showCreateModal = false}" /> {/if}
