@@ -1,6 +1,6 @@
 <script lang='ts'>
   import WalletCard from '../../components/dashboard/WalletCard.svelte';
-import type { PageData } from './$types';
+  import type { PageData } from './$types';
   export let data: PageData;
 
   const wallets = data.wallets;
