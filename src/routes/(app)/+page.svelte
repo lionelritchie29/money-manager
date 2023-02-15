@@ -1,5 +1,9 @@
 <script lang='ts'>
-  const wallets = [1,2,3,4]
+  import WalletCard from '../../components/dashboard/WalletCard.svelte';
+import type { PageData } from './$types';
+  export let data: PageData;
+
+  const wallets = data.wallets;
   const dummies = [1,2,3,4,5,6];
 </script>
 
@@ -8,9 +12,7 @@
   <ul class="grid grid-cols-4 gap-4">
     {#each wallets as wallet}
       <li>
-        <div class="rounded-lg bg-white h-24 shadow-sm">
-
-        </div>
+        <WalletCard {wallet} />
       </li>
     {/each}
   </ul>
