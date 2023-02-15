@@ -8,7 +8,7 @@
 <div class="rounded-lg bg-white shadow-sm hover:shadow-md py-4 px-6 border">
   <div class="flex justify-between items-center">
     <div class="flex items-center">
-      <div class="p-2 rounded-lg shadow" style:background={wallet.color}>
+      <div class="p-2 rounded-lg" style:background={wallet.color}>
         <WalletIcon class="w-6 h-6 text-gray-100" />
       </div>
       <div class="ml-9 text-gray-500 font-medium">{wallet.type}</div>
