@@ -48,6 +48,6 @@
       </label>
     </div>
 
-    <button type="submit" class="btn-success mt-6">Save</button>
+    <button type="submit" class="btn btn-success mt-6">Save</button>
   </form>
 </Modal>

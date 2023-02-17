@@ -23,8 +23,8 @@
     </div>
 
     <div class="flex space-x-3">
-      <button class="btn-primary" on:click={() => showUpdateModal = true}>Edit</button>
-      <button class="btn-danger">Delete</button>
+      <button class="btn btn-primary" on:click={() => showUpdateModal = true}>Edit</button>
+      <button class="btn btn-danger">Delete</button>
     </div>
   </div>
 

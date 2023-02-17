@@ -14,7 +14,7 @@
   <span slot="title">Wallets</span>
 
   <div slot="side-content">
-    <button class="btn-success" on:click={() => showCreateModal = true}>+ Add Wallet</button>
+    <button class="btn btn-success" on:click={() => showCreateModal = true}>+ Add Wallet</button>
   </div>
 
   <ul slot="main-content" class="grid grid-cols-1 gap-4">
