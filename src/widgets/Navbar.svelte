@@ -4,7 +4,7 @@
 
     <ul class="flex space-x-5">
       {#each links as link }
-        <li class={`hover:text-blue-600 font-medium cursor-pointer ${$page.route.id === link.href ? 'text-blue-600' : ''}`}>
+        <li class={`hover:text-blue-600 cursor-pointer ${isActiveLink($page.url.pathname, link) ? 'font-semibold' : ''}`}>
           <a href={link.href}>{link.title}</a>
         </li>
       {/each}
@@ -18,7 +18,11 @@
 
     <!-- svelte-ignore a11y-click-events-have-key-events -->
     <div on:click={toggleProfileDropdown} class="flex items-center text-sm cursor-pointer relative">
-      <div class="w-10 h-10 rounded-full border bg-gray-300"></div>
+      {#if $currentUser.photoUrl}
+        <img class="w-10 h-10 rounded-full border" alt="User" src={$currentUser.photoUrl} />
+      {:else}
+        <div class="w-10 h-10 rounded-full border bg-gray-300" />
+      {/if}
       <div class="ml-2">
         <span class="block font-semibold flex items-center">
           <span>{$currentUser.displayName}</span>
@@ -53,7 +57,14 @@
   export let baseLayoutClass: string = '';
   let showProfileDropdown = false;
 
-  const links = [
+  const isActiveLink = (pathname: string, link: {title: string, href: string}) => {
+    if (link.href === '/' && pathname === '/') return true;
+    if (link.href === '/' && pathname !== '/') return false;
+
+    return pathname.includes(link.href);
+  }
+
+  let links = [
     {
       title: 'Dashboard',
       href: '/'
