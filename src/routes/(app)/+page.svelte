@@ -3,14 +3,14 @@
   import type { PageData } from './$types';
   export let data: PageData;
 
-  const wallets = data.wallets;
+  const userWalletsResponse = data.userWalletsResponse
   const dummies = [1,2,3,4,5,6];
 </script>
 
 <section>
   <h1 class="text-2xl font-bold mb-2">Wallets</h1>
   <ul class="grid grid-cols-4 gap-4">
-    {#each wallets as wallet}
+    {#each userWalletsResponse.data as wallet}
       <li>
         <WalletCard {wallet} />
       </li>
