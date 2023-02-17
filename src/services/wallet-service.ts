@@ -1,4 +1,4 @@
-import { addDoc, collection, getDocs, query, setDoc, where } from 'firebase/firestore';
+import { addDoc, collection, getDocs, query, where } from 'firebase/firestore';
 import { BaseService } from './base-service';
 import type { Wallet } from '../types/Wallet';
 
@@ -9,7 +9,9 @@ export class WalletService extends BaseService {
 		if (await this.isTokenValid()) {
 			const q = query(collection(this.db, this.collectionName), where('userId', '==', userId));
 			const querySnapshots = await getDocs(q);
-			return querySnapshots.docs.map((doc) => doc.data()) as Wallet[];
+			return querySnapshots.docs.map((doc) => {
+				return { id: doc.id, ...doc.data() };
+			}) as Wallet[];
 		}
 		return [];
 	}

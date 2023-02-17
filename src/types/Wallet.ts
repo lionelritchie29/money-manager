@@ -1,4 +1,5 @@
 export interface Wallet {
+	id: string;
 	userId: string;
 	currency: string;
 	color: string;
