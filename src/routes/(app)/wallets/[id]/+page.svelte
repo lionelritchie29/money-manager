@@ -1,9 +1,12 @@
 <script lang='ts'>
 	import { goto } from "$app/navigation";
 	import { ChevronLeft, Wallet } from "svelte-heros-v2";
+	import UpdateWalletModal from "../../../../components/wallets/UpdateWalletModal.svelte";
 	import type { PageData } from "./$types";
 
   export let data: PageData;
+
+  let showUpdateModal = false
 
   const backToWallet = () => {
     goto('/wallets', {replaceState: true})
@@ -20,7 +23,7 @@
     </div>
 
     <div class="flex space-x-3">
-      <button class="btn-primary">Edit</button>
+      <button class="btn-primary" on:click={() => showUpdateModal = true}>Edit</button>
       <button class="btn-danger">Delete</button>
     </div>
   </div>
@@ -45,3 +48,5 @@
     </div>
   </div>
 </section>
+
+{#if showUpdateModal} <UpdateWalletModal wallet={data.walletResponse.data} on:close="{() => showUpdateModal = false}" /> {/if}

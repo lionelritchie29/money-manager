@@ -20,4 +20,12 @@
 	.btn-danger {
 		@apply bg-red-600 hover:bg-red-700 text-white rounded-full text-sm w-full px-4 py-2;
 	}
+
+	.btn-disabled {
+		@apply bg-gray-300 text-white rounded-full text-sm w-full px-4 py-2;
+	}
+
+	.btn[disabled] {
+		@apply bg-gray-300 text-white rounded-full text-sm w-full px-4 py-2;
+	}
 }
