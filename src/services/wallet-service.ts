@@ -1,4 +1,4 @@
-import { addDoc, collection, getDocs, query, where } from 'firebase/firestore';
+import { addDoc, collection, doc, getDoc, getDocs, query, where } from 'firebase/firestore';
 import { BaseService } from './base-service';
 import type { Wallet } from '../types/Wallet';
 
@@ -16,9 +16,21 @@ export class WalletService extends BaseService {
 		return [];
 	}
 
-	public async addUserWallets(wallet: Wallet): Promise<boolean> {
+	public async getWallet(walletId: string): Promise<Wallet | null> {
 		if (await this.isTokenValid()) {
-			await addDoc(collection(this.db, this.collectionName), wallet);
+			const docRef = doc(this.db, this.collectionName, walletId);
+			const docSnap = await getDoc(docRef);
+
+			if (!docSnap.exists()) return null;
+			return { id: docSnap.id, ...docSnap.data() } as Wallet;
+		}
+		return null;
+	}
+
+	public async addUserWallets(wallet: Wallet): Promise<boolean> {
+		const { id, ...payload } = wallet;
+		if (await this.isTokenValid()) {
+			await addDoc(collection(this.db, this.collectionName), payload);
 			return true;
 		}
 		return false;

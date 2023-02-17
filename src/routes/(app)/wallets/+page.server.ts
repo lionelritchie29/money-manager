@@ -28,6 +28,7 @@ export const actions: Actions = {
 			const type = data.get('type') as string;
 
 			const wallet: Wallet = {
+				id: '',
 				userId: user.uid,
 				color,
 				currency,
