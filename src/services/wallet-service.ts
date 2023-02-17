@@ -1,4 +1,13 @@
-import { addDoc, collection, doc, getDoc, getDocs, query, where } from 'firebase/firestore';
+import {
+	addDoc,
+	collection,
+	deleteDoc,
+	doc,
+	getDoc,
+	getDocs,
+	query,
+	where
+} from 'firebase/firestore';
 import { BaseService } from './base-service';
 import type { Wallet } from '../types/Wallet';
 
@@ -31,6 +40,14 @@ export class WalletService extends BaseService {
 		const { id, ...payload } = wallet;
 		if (await this.isTokenValid()) {
 			await addDoc(collection(this.db, this.collectionName), payload);
+			return true;
+		}
+		return false;
+	}
+
+	public async deleteUserWallet(id: string): Promise<boolean> {
+		if (await this.isTokenValid()) {
+			await deleteDoc(doc(this.db, this.collectionName, id));
 			return true;
 		}
 		return false;
