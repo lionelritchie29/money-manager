@@ -6,7 +6,7 @@
   export let wallet: Wallet
 </script>
 
-<div class="rounded-lg shadow p-3" style:background={wallet.color || '#fff'}>
+<button class="w-full text-left rounded-lg shadow p-3 hover:shadow-lg" style:background={wallet.color || '#fff'}>
   <div class="flex text-white items-center">
     <div><WalletIcon class="w-8 h-8" /></div>
   
@@ -15,4 +15,4 @@
       <div class="font-semibold">{format(wallet.currency, wallet.initialBalance)}</div>
     </div>
   </div>
-</div>
+</button>
