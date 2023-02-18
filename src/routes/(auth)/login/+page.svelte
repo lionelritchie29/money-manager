@@ -2,12 +2,14 @@
 	import { goto } from '$app/navigation';
 	import { signInWithPopup, type UserCredential } from 'firebase/auth';
 	import { Wallet } from 'svelte-heros-v2';
-  import {googleProvider, auth} from '$lib/firebase'
+  import {googleProvider, auth} from '$lib/firebase';
 	import type { User } from '../../../types/User';
+  import toast, {Toaster} from 'svelte-french-toast'
 
-  let normalGoogleSignInBtnImg = '/images/btn_google_signin_light_normal_web.png'
-  let focusGoogleSignInBtnImg = '/images/btn_google_signin_light_pressed_web.png'
+  let normalGoogleSignInBtnImg = '/images/btn_google_signin_light_normal_web.png';
+  let focusGoogleSignInBtnImg = '/images/btn_google_signin_light_pressed_web.png';
   let googleSignInBtnImg = normalGoogleSignInBtnImg;
+  let loading = false;
 
   const onGoogleSignInBtnHover = () => {
     if (googleSignInBtnImg !== focusGoogleSignInBtnImg) {
@@ -22,6 +24,9 @@
   }
 
   const signInWithGoogle = async () => {
+    loading = true;
+    const loadToast = toast.loading('Signing in...')
+
     const result: UserCredential = await signInWithPopup(auth, googleProvider)
     const user: User = {
       displayName: result.user.displayName,
@@ -39,7 +44,9 @@
       return;
     } 
 
-    goto('/', {replaceState: true})
+    toast.dismiss(loadToast)
+    toast.success('Signed in')
+    goto('/', {replaceState: true});
   }
 </script>
 
@@ -54,14 +61,17 @@
       <!-- svelte-ignore a11y-mouse-events-have-key-events -->
       <div class="flex">
         <button 
-        class="mt-4"
-        on:click={signInWithGoogle} 
-        on:mouseover={onGoogleSignInBtnHover} 
-        on:mouseleave={onGoogleSignInBtnLeave}
-      >
+          disabled={loading}
+          class="mt-4"
+          on:click={signInWithGoogle} 
+          on:mouseover={onGoogleSignInBtnHover} 
+          on:mouseleave={onGoogleSignInBtnLeave}
+        >
         <img src={googleSignInBtnImg} alt="Google Sign In Button" />
       </button>
       </div>
     </div>
   </div>
 </section>
+
+<Toaster />
