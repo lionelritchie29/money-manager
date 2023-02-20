@@ -1,11 +1,14 @@
 <script lang='ts'>
+	import type { Wallet } from "../types/Wallet";
 	import Modal from "../widgets/Modal.svelte";
+
+  export let userWallets: Wallet[] = [];
 </script>
 
 <Modal on:close>
   <span slot="header">Add New Record</span>
 
-  <form method="post" action="?/create">
+  <form>
     <div class="text-sm mt-3">
       <label class="block" for="type">Type</label>
       <select class="border px-2 p-2 w-full rounded mt-1" name="type">
@@ -16,9 +19,10 @@
 
     <div class="text-sm mt-3">
       <label class="block" for="type">Account</label>
-      <select class="border px-2 p-2 w-full rounded mt-1" name="type">
-        <option value="expense">BCA Xpresi</option>
-        <option value="Income">Cash</option>
+      <select class="border px-2 p-2 w-full rounded mt-1" name="walletId">
+        {#each userWallets as wallet}
+          <option value={wallet.id}>{wallet.name}</option>
+        {/each}
       </select>
     </div>
 

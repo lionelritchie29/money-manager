@@ -28,7 +28,7 @@
 </script>
 
 <div class="root">
-  <Navbar {baseLayoutClass}/>  
+  <Navbar userWallets={data.userWalletsResponse.data} {baseLayoutClass}/>  
 
   <section class={`bg-gray-100 min-h-screen`}>
     <div class={`${baseLayoutClass} pt-8`}>
