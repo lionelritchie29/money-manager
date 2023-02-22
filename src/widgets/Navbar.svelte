@@ -5,12 +5,12 @@
   import {currentUser} from "$lib/auth"
 	import CreateRecordModal from '../components/CreateRecordModal.svelte';
 	import type { Wallet } from '../types/Wallet';
+  import { showCreateRecordModal } from '$lib/utils/create-record';
 
   export let baseLayoutClass: string = '';
   export let userWallets: Wallet[] = []
 
   let showProfileDropdown = false;
-  let showCreateRecord = false;
 
   const isActiveLink = (pathname: string, link: {title: string, href: string}) => {
     if (link.href === '/' && pathname === '/') return true;
@@ -83,7 +83,7 @@
 
   <div class="flex items-center">
     <div class="mr-6 text-sm">
-      <button on:click={() => showCreateRecord = true} class="btn btn-primary py-1">+ Record</button>
+      <button on:click={() => $showCreateRecordModal = true} class="btn btn-primary py-1">+ Record</button>
     </div>
 
     <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -118,4 +118,4 @@
 
 <div class="border-b border-gray-300"></div>
 
-{#if showCreateRecord} <CreateRecordModal {userWallets} on:close={() => showCreateRecord = false} /> {/if}
+{#if $showCreateRecordModal} <CreateRecordModal {userWallets} on:close={() => $showCreateRecordModal = false} /> {/if}
