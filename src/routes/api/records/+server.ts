@@ -7,23 +7,7 @@ import { RecordService } from '../../../services/record-service';
 export const POST: RequestHandler = async ({ cookies, request }) => {
 	try {
 		const token = cookies.get(KEY.CURRENT_USER_TOKEN);
-		const data = await request.formData();
-
-		const type = data.get('type') as string;
-		const walletId = data.get('walletId') as string;
-		const amount = parseInt(data.get('amount') as string);
-		const currency = data.get('currency') as string;
-		const date = new Date(data.get('date') as string);
-		const description = data.get('description') as string;
-
-		const dto: CreateRecordDto = {
-			amount,
-			currency,
-			date,
-			description,
-			type,
-			walletId
-		};
+		const dto: CreateRecordDto = await request.json();
 
 		const recordService = new RecordService(token);
 		const success = await recordService.addRecord(dto);

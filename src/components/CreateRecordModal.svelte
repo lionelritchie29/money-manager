@@ -1,18 +1,58 @@
 <script lang='ts'>
+	import axios from "axios";
+	import toast, {Toaster} from "svelte-french-toast";
 	import type { Wallet } from "../types/Wallet";
 	import Modal from "../widgets/Modal.svelte";
+  import {PUBLIC_URL} from '$env/static/public'
+	import type { CreateRecordDto } from "../types/dto/create-record.dto";
+  import { createEventDispatcher } from 'svelte';
 
+  
+  
+	const dispatch = createEventDispatcher();
   export let userWallets: Wallet[] = [];
-
+  
   let type: string = 'Expense';
   let walletId: string = userWallets[0].id;
   let amount : number = 0;
   let currency: string = 'IDR';
   let date: Date = new Date();
   let description: string = '';
+  let loading = false;
 
   const createRecord = async () => {
-    console.log({type, walletId, amount, currency, date, description})
+    try {
+      loading = true;
+
+      const loadToast = toast.loading('Saving record...');
+
+      const payload: CreateRecordDto = {
+        amount,
+        currency,
+        date,
+        description,
+        type,
+        walletId
+      }
+      const response = await axios.post<{success: boolean, message?: string}>(`${PUBLIC_URL}/api/records`, payload);
+      
+      toast.dismiss(loadToast);
+      if (response.data.success) {
+        toast.success('Record created!');
+        
+        setTimeout(() => {
+          dispatch('close');
+        }, 2000);
+      } else {
+        loading = false
+        toast.error(response.data.message ?? 'An error occured when adding records');
+      }
+    } catch (e: unknown) {
+      loading = false
+      console.error(e);
+      toast.error('An error occured when adding records');
+    }
+    
   }
 </script>
 
@@ -66,6 +106,8 @@
       </div>
     </div>
 
-    <button type="submit" class="btn btn-success mt-6">Save</button>
+    <button disabled={loading} type="submit" class="btn btn-success mt-6">Save</button>
   </form>
 </Modal>
+
+<Toaster />
