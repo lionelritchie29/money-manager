@@ -1,8 +1,10 @@
 <script lang='ts'>
 	import SideLayout from "../../../widgets/SideLayout.svelte";
   import { showCreateRecordModal } from '$lib/utils/create-record';
+	import type { PageData } from "./$types";
 
-  const records = [1,2,3,4,5,6]
+  export let data: PageData;
+  const records = data.recordResponse.data
 </script>
 
 <SideLayout>
