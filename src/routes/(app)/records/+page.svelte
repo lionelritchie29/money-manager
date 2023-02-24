@@ -2,6 +2,7 @@
 	import SideLayout from "../../../widgets/SideLayout.svelte";
   import { showCreateRecordModal } from '$lib/utils/create-record';
 	import type { PageData } from "./$types";
+  import RecordCard from '../../../components/records/RecordCard.svelte'
 
   export let data: PageData;
   const records = data.recordResponse.data
@@ -17,9 +18,7 @@
   <ul slot="main-content" class="grid grid-cols-1 gap-4">
     {#each records as record}
       <li>
-        <div class="rounded-lg bg-white shadow-sm h-20">
-
-        </div>
+        <RecordCard {record} wallets={data.userWalletsResponse.data}/>
       </li>
     {/each}
   </ul>
