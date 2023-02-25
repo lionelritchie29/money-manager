@@ -32,10 +32,6 @@
       title: 'Records',
       href: '/records'
     },
-    {
-      title: 'Statistics',
-      href: '/statistics'
-    }
   ]
 
   const signOut = async () => {
